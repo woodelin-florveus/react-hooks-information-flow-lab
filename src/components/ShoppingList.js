@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Item from "./Item";
+import Filter from "./Filter"
 
 function ShoppingList({ items }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -16,14 +17,7 @@ function ShoppingList({ items }) {
 
   return (
     <div className="ShoppingList">
-      <div className="Filter">
-        <select name="filter" onChange={handleCategoryChange}>
-          <option value="All">Filter by category</option>
-          <option value="Produce">Produce</option>
-          <option value="Dairy">Dairy</option>
-          <option value="Dessert">Dessert</option>
-        </select>
-      </div>
+          <Filter onCategoryChange={handleCategoryChange} />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
           <Item key={item.id} name={item.name} category={item.category} />
@@ -34,3 +28,10 @@ function ShoppingList({ items }) {
 }
 
 export default ShoppingList;
+
+
+// Create a Filter component by refactoring the <select> element out of the 
+// ShoppingList component. Changing the selection in the dropdown should still 
+// change which items are displayed in the shopping list.
+// You will need to pass a callback function as a prop called 
+// onCategoryChange to the Filter component in order for the test to pass.
